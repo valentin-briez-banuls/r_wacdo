@@ -1,0 +1,25 @@
+<h1>Liste des fonctions</h1>
+
+<%= link_to "Nouvelle fonction", new_fonction_path, class: "btn btn-primary" %>
+
+<table>
+  <thead>
+  <tr>
+    <th>Nom</th>
+    <th>Description</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @fonctions.each do |fonction| %>
+    <tr>
+      <td><%= fonction.title %></td>
+      <td><%= fonction.description %></td>
+      <td>
+        <%= link_to "Modifier", edit_fonction_path(fonction) %> |
+        <%= link_to "Supprimer", fonction, method: :delete, data: { confirm: "Êtes-vous sûr ?" } %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

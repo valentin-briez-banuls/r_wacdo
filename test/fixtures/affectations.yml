@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  collaborateur: one
+  restaurant: one
+  fonction: one
+  start_date: 2025-05-29
+  end_date: 2025-05-29
+
+two:
+  collaborateur: two
+  restaurant: two
+  fonction: two
+  start_date: 2025-05-29
+  end_date: 2025-05-29

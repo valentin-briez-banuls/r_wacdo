@@ -1,0 +1,29 @@
+<%= form_with(model: @affectation) do |form| %>
+  <div>
+  <%= form.label :restaurant_id, "Restaurant" %>
+  <%= form.collection_select :restaurant_id, Restaurant.all, :id, :name, prompt: "Sélectionner un restaurant" %>
+  </div>
+  <div>
+    <%= form.label :collaborateur_id, "Collaborateur" %>
+    <%= form.collection_select :collaborateur_id, @collaborateurs, :id, :full_name, prompt: "Sélectionner un collaborateur" %>
+  </div>
+
+  <div>
+    <%= form.label :fonction_id, "Fonction" %>
+    <%= form.collection_select :fonction_id, @fonctions, :id, :title, prompt: "Sélectionner une fonction" %>
+  </div>
+
+  <div>
+    <%= form.label :start_date, "Date début" %>
+    <%= form.date_field :start_date %>
+  </div>
+
+  <div>
+    <%= form.label :end_date, "Date fin" %>
+    <%= form.date_field :end_date %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

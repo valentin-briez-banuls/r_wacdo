@@ -1,0 +1,21 @@
+<h2>Connexion</h2>
+
+<% if flash[:alert] %>
+  <p style="color: red;"><%= flash[:alert] %></p>
+<% end %>
+
+<%= form_with url: login_path, method: :post, local: true do %>
+  <div>
+    <%= label_tag :email, "Email" %><br>
+    <%= email_field_tag :email, params[:email] %>
+  </div>
+
+  <div>
+    <%= label_tag :password, "Mot de passe" %><br>
+    <%= password_field_tag :password %>
+  </div>
+
+  <div>
+    <%= submit_tag "Se connecter" %>
+  </div>
+<% end %>

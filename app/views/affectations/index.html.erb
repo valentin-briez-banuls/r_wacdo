@@ -1,0 +1,29 @@
+<h1>Liste des affectations</h1>
+
+<%= link_to "Nouvelle affectation", new_affectation_path, class: "btn btn-primary" %>
+
+<table>
+  <thead>
+  <tr>
+    <th>Collaborateur</th>
+    <th>Fonction</th>
+    <th>Date début</th>
+    <th>Date fin</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @affectations.each do |affectation| %>
+    <tr>
+      <td><%= affectation.collaborateur.first_name %> <%= affectation.collaborateur.last_name %></td>
+      <td><%= affectation.fonction.title %></td>
+      <td><%= affectation.start_date %></td>
+      <td><%= affectation.end_date %></td>
+      <td>
+        <%= link_to "Modifier", edit_affectation_path(affectation) %> |
+        <%= link_to "Supprimer", affectation, method: :delete, data: { confirm: "Êtes-vous sûr ?" } %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

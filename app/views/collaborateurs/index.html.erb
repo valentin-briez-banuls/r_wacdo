@@ -1,0 +1,30 @@
+<h1>Collaborateurs</h1>
+
+<%= link_to "Nouveau Collaborateur", new_collaborateur_path %>
+
+<table>
+  <thead>
+  <tr>
+    <th>Prénom</th>
+    <th>Nom</th>
+    <th>Email</th>
+    <th>Admin</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @collaborateurs.each do |collaborateur| %>
+    <tr>
+      <td><%= collaborateur.first_name %></td>
+      <td><%= collaborateur.last_name %></td>
+      <td><%= collaborateur.email %></td>
+      <td><%= collaborateur.admin? ? "Oui" : "Non" %></td>
+      <td>
+        <%= link_to 'Voir', collaborateur_path(collaborateur) %> |
+        <%= link_to 'Modifier', edit_collaborateur_path(collaborateur) %> |
+        <%= link_to 'Supprimer', collaborateur_path(collaborateur), method: :delete, data: { confirm: 'Êtes-vous sûr ?' } %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

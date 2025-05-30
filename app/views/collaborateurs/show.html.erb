@@ -1,0 +1,7 @@
+<h1><%= @collaborateur.first_name %> <%= @collaborateur.last_name %></h1>
+
+<p>Email : <%= @collaborateur.email %></p>
+<p>Admin : <%= @collaborateur.admin? ? "Oui" : "Non" %></p>
+
+<%= link_to 'Modifier', edit_collaborateur_path(@collaborateur) %> |
+<%= link_to 'Retour à la liste', collaborateurs_path %>

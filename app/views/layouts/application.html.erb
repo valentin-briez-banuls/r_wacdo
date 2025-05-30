@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wacdo</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
+
+<body>
+<header>
+  <nav>
+    <% if collaborateur_signed_in? %>
+      <span>Connecté en tant que : <%= current_collaborateur.email %></span>
+      <% if current_collaborateur.admin? %>
+        <ul>
+          <li><%= link_to "Collaborateurs", collaborateurs_path %></li>
+          <li><%= link_to "Restaurants", restaurants_path %></li>
+          <li><%= link_to "Fonctions", fonctions_path %></li>
+          <li><%= link_to "Affectations", affectations_path %></li>
+        </ul>
+      <% end %>
+      <%= button_to 'Se déconnecter', destroy_collaborateur_session_path, method: :delete %>
+    <% else %>
+      <%= link_to "Connexion", new_collaborateur_session_path %>
+    <% end %>
+  </nav>
+</header>
+
+<main>
+  <% if notice %>
+    <p class="notice"><%= notice %></p>
+  <% end %>
+  <% if alert %>
+    <p class="alert"><%= alert %></p>
+  <% end %>
+
+  <%= yield %>
+</main>
+</body>
+</html>
