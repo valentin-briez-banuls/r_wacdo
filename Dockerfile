@@ -18,9 +18,10 @@ ENV RAILS_ENV="production" \
 
 FROM base AS build
 
-# Installer les packages nécessaires à la compilation des gems
+# Installer les packages nécessaires à la compilation des gems, y compris libpq-dev pour pg
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libyaml-dev pkg-config && \
+    apt-get install --no-install-recommends -y \
+      build-essential git libyaml-dev pkg-config libpq-dev && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Copier Gemfile et Gemfile.lock
