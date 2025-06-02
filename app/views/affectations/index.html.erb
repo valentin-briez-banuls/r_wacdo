@@ -1,6 +1,29 @@
 <h1>Liste des affectations</h1>
-
 <%= link_to "Nouvelle affectation", new_affectation_path, class: "btn btn-primary" %>
+
+<%= search_form_for @q, url: affectations_path, method: :get, local: true do |f| %>
+  <div>
+    <%= f.label :collaborateur_first_name_cont, "Prénom collaborateur" %>
+    <%= f.search_field :collaborateur_first_name_cont %>
+
+    <%= f.label :restaurant_id_eq, "Restaurant" %>
+    <%= f.collection_select :restaurant_id_eq, Restaurant.all, :id, :name, { prompt: "Tous les restaurants" } %>
+
+
+    <%= f.label :fonction_title_cont, "Fonction" %>
+    <%= f.search_field :fonction_title_cont %>
+
+    <%= f.label :start_date_gteq, "À partir du" %>
+    <%= f.date_field :start_date_gteq %>
+
+    <%= f.label :end_date_lteq, "Jusqu’au" %>
+    <%= f.date_field :end_date_lteq %>
+
+    <%= f.submit "Rechercher" %>
+    <%= link_to "Réinitialiser", affectations_path %>
+  </div>
+<% end %>
+
 
 <table>
   <thead>

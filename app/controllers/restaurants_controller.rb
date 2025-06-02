@@ -3,8 +3,10 @@ class RestaurantsController < ApplicationController
   before_action :check_admin
 
   def index
-    @restaurants = Restaurant.all
+    @q = Restaurant.ransack(params[:q])
+    @restaurants = @q.result(distinct: true)
   end
+
 
   def new
     @restaurant = Restaurant.new

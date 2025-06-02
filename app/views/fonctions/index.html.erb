@@ -1,6 +1,15 @@
 <h1>Liste des fonctions</h1>
 
 <%= link_to "Nouvelle fonction", new_fonction_path, class: "btn btn-primary" %>
+<%= search_form_for @q, url: fonctions_path, method: :get, local: true do |f| %>
+  <div>
+    <%= f.label :title_cont, "Titre contient" %>
+    <%= f.search_field :title_cont %>
+
+    <%= f.submit "Rechercher" %>
+    <%= link_to "Réinitialiser", fonctions_path %>
+  </div>
+<% end %>
 
 <table>
   <thead>

@@ -7,11 +7,12 @@ class Collaborateur < ApplicationRecord
   has_many :fonctions, through: :affectations
 
   validates :first_name, :last_name, :email, presence: true
-  validates :email, uniqueness: true
 
   # Mot de passe uniquement si admin et en création ou si un nouveau password est donné
   validates :password, presence: true, confirmation: true, length: { minimum: 6 }, if: :password_required?
   validates :password_confirmation, presence: true, if: :password_required?
+
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true
 
   def full_name
     "#{first_name} #{last_name}"

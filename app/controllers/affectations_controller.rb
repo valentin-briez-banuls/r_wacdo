@@ -2,8 +2,10 @@ class AffectationsController < ApplicationController
   before_action :set_affectation, only: %i[show edit update destroy]
 
   def index
-    @affectations = Affectation.includes(:collaborateur, :fonction).all
+    @q = Affectation.ransack(params[:q])
+    @affectations = @q.result.includes(:collaborateur, :restaurant, :fonction)
   end
+
 
   def show
   end

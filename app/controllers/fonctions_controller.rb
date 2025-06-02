@@ -2,8 +2,10 @@ class FonctionsController < ApplicationController
   before_action :set_fonction, only: %i[show edit update destroy]
 
   def index
-    @fonctions = Fonction.all
+    @q = Fonction.ransack(params[:q])
+    @fonctions = @q.result(distinct: true)
   end
+
 
   def show
   end

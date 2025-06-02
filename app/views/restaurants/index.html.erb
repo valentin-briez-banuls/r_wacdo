@@ -1,4 +1,18 @@
 <h1>Liste des restaurants</h1>
+<%= link_to 'Nouveau restaurant', new_restaurant_path %>
+
+<%= search_form_for @q, url: restaurants_path, method: :get, local: true do |f| %>
+  <div>
+    <%= f.label :name_cont, "Nom du restaurant contient" %>
+    <%= f.search_field :name_cont %>
+
+    <%= f.label :city_cont, "Ville contient" %>
+    <%= f.search_field :city_cont %>
+
+    <%= f.submit "Rechercher" %>
+    <%= link_to "Réinitialiser", restaurants_path %>
+  </div>
+<% end %>
 
 <table>
   <thead>
@@ -24,4 +38,3 @@
   </tbody>
 </table>
 
-<%= link_to 'Nouveau restaurant', new_restaurant_path %>
