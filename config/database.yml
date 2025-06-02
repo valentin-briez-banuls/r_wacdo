@@ -6,7 +6,7 @@ default: &default
   password: MmsbQMznMCZWkX8uthyz8wVnjXpFh2ZM
   host: dpg-d0o2b0uuk2gs73fkrolg-a.oregon-postgres.render.com
   port: 5432
-
+  database: wacdo_w9gw
 production:
   primary:
     <<: *default
