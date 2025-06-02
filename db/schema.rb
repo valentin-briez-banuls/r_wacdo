@@ -11,10 +11,14 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.0].define(version: 2025_05_29_221310) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_catalog.plpgsql"
+  enable_extension "pg_stat_statements"
+
   create_table "affectations", force: :cascade do |t|
-    t.integer "collaborateur_id", null: false
-    t.integer "restaurant_id", null: false
-    t.integer "fonction_id", null: false
+    t.bigint "collaborateur_id", null: false
+    t.bigint "restaurant_id", null: false
+    t.bigint "fonction_id", null: false
     t.date "start_date"
     t.date "end_date"
     t.datetime "created_at", null: false
