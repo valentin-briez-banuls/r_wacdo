@@ -46,5 +46,5 @@ class RestaurantsController < ApplicationController
       redirect_to root_path, alert: "Accès refusé."
     end
   end
-
+  dd
 end
