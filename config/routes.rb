@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   get "sessions/create"
   get "sessions/destroy"
   get "posts/index"
-  devise_for :collaborateurs
+  devise_for :collaborateurs, skip: [:registrations]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -37,9 +37,9 @@ Rails.application.routes.draw do
   post   "/login",  to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
 
-  resources :collaborateurs
   resources :restaurants
   resources :fonctions
   resources :affectations
+  resources :collaborateurs, only: [:index, :new, :create, :edit, :update, :destroy]
 
 end

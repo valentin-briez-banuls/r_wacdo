@@ -1,6 +1,23 @@
-<h1>Collaborateurs</h1>
+<h1>Liste des collaborateurs</h1>
 
-<%= link_to "Nouveau Collaborateur", new_collaborateur_path %>
+<%= search_form_for @q, url: collaborateurs_path, method: :get, local: true do |f| %>
+  <div>
+    <%= f.label :first_name_cont, "Prénom contient" %>
+    <%= f.search_field :first_name_cont %>
+
+    <%= f.label :last_name_cont, "Nom contient" %>
+    <%= f.search_field :last_name_cont %>
+
+    <%= f.label :email_cont, "Email contient" %>
+    <%= f.search_field :email_cont %>
+
+    <%= f.label :admin_eq, "Administrateur ?" %>
+    <%= f.select :admin_eq, [["Oui", true], ["Non", false]], include_blank: "Tous" %>
+
+    <%= f.submit "Rechercher" %>
+    <%= link_to "Réinitialiser", collaborateurs_path, class: "button" %>
+  </div>
+<% end %>
 
 <table>
   <thead>
@@ -20,9 +37,11 @@
       <td><%= collaborateur.email %></td>
       <td><%= collaborateur.admin? ? "Oui" : "Non" %></td>
       <td>
-        <%= link_to 'Voir', collaborateur_path(collaborateur) %> |
-        <%= link_to 'Modifier', edit_collaborateur_path(collaborateur) %> |
-        <%= link_to 'Supprimer', collaborateur_path(collaborateur), method: :delete, data: { confirm: 'Êtes-vous sûr ?' } %>
+        <%= link_to "Voir", collaborateur_path(collaborateur) %> |
+        <%= link_to "Modifier", edit_collaborateur_path(collaborateur) %> |
+        <%= link_to "Supprimer", collaborateur_path(collaborateur),
+                    method: :delete,
+                    data: { confirm: "Confirmer ?" } %>
       </td>
     </tr>
   <% end %>

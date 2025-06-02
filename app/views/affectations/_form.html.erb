@@ -1,11 +1,18 @@
-<%= form_with(model: @affectation) do |form| %>
+<%= form_with(model: @affectation, local: true) do |form| %>
   <div>
-  <%= form.label :restaurant_id, "Restaurant" %>
-  <%= form.collection_select :restaurant_id, Restaurant.all, :id, :name, prompt: "Sélectionner un restaurant" %>
+    <%= form.label :restaurant_id, "Restaurant" %>
+    <%= form.collection_select :restaurant_id, Restaurant.all, :id, :name, prompt: "Sélectionner un restaurant" %>
   </div>
+
   <div>
     <%= form.label :collaborateur_id, "Collaborateur" %>
-    <%= form.collection_select :collaborateur_id, @collaborateurs, :id, :full_name, prompt: "Sélectionner un collaborateur" %>
+    <% if @affectation.persisted? %>
+      <!-- Affichage en lecture seule si c'est une édition -->
+      <%= Collaborateur.find(@affectation.collaborateur_id).full_name %>
+      <%= form.hidden_field :collaborateur_id %>
+    <% else %>
+      <%= form.collection_select :collaborateur_id, @collaborateurs, :id, :full_name, prompt: "Sélectionner un collaborateur" %>
+    <% end %>
   </div>
 
   <div>

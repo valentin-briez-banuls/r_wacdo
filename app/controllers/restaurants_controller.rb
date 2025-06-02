@@ -6,7 +6,6 @@ class RestaurantsController < ApplicationController
     @restaurants = Restaurant.all
   end
 
-
   def new
     @restaurant = Restaurant.new
   end
@@ -22,6 +21,18 @@ class RestaurantsController < ApplicationController
 
   def show
     @restaurant = Restaurant.find(params[:id])
+  end
+
+  def edit
+    @restaurant = Restaurant.find(params[:id])
+  end
+  def update
+    @restaurant = Restaurant.find(params[:id])
+    if @restaurant.update(restaurant_params)
+      redirect_to @restaurant, notice: 'Restaurant mis à jour.'
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   private
