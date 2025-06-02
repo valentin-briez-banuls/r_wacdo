@@ -6,15 +6,27 @@ default: &default
   password: MmsbQMznMCZWkX8uthyz8wVnjXpFh2ZM
   host: dpg-d0o2b0uuk2gs73fkrolg-a.oregon-postgres.render.com
   port: 5432
-  database: wacdo_w9gw
-
-development:
-  <<: *default
-
-test:
-  <<: *default
-  database: notebook_test
 
 production:
-  <<: *default
-  database: wacdo_w9gw
+  primary:
+    <<: *default
+    database: wacdo_w9gw
+  cable:
+    <<: *default
+    database: wacdo_w9gw  # Ou une DB dédiée au cable si tu en as une
+
+development:
+  primary:
+    <<: *default
+    database: wacdo_w9gw_dev
+  cable:
+    <<: *default
+    database: wacdo_w9gw_dev
+
+test:
+  primary:
+    <<: *default
+    database: wacdo_test
+  cable:
+    <<: *default
+    database: wacdo_test
