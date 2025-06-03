@@ -7,26 +7,13 @@ default: &default
   host: dpg-d0o2b0uuk2gs73fkrolg-a.oregon-postgres.render.com
   port: 5432
   database: wacdo_w9gw
-production:
-  primary:
-    <<: *default
-    database: wacdo_w9gw
-  cable:
-    <<: *default
-    database: wacdo_w9gw  # Ou une DB dédiée au cable si tu en as une
 
 development:
-  primary:
-    <<: *default
-    database: wacdo_w9gw_dev
-  cable:
-    <<: *default
-    database: wacdo_w9gw_dev
+  <<: *default
 
 test:
-  primary:
-    <<: *default
-    database: wacdo_test
-  cable:
-    <<: *default
-    database: wacdo_test
+  <<: *default
+  database: notebook_test  # tu peux créer une base test séparée
+
+production:
+  <<: *default
