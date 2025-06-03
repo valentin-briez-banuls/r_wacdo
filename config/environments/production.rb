@@ -19,6 +19,10 @@ Rails.application.configure do
   # Niveau de logs
   config.log_level = :info
 
+
+  config.action_cable.mount_path = nil
+  config.action_cable.url = nil
+
   # Exemple configuration email (à adapter)
   # config.action_mailer.perform_caching = false
   # config.action_mailer.raise_delivery_errors = false
