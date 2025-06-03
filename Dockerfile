@@ -57,4 +57,6 @@ USER 1000:1000
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 EXPOSE 3000
-CMD ["./bin/thrust", "./bin/rails", "server"]
+
+# Lancement explicite du serveur Rails sur le bon port et interface pour Render
+CMD ["./bin/rails", "server", "-b", "0.0.0.0", "-p", "3000"]
