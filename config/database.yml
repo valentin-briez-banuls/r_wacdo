@@ -13,7 +13,7 @@ development:
 
 test:
   <<: *default
-  database: notebook_test  # tu peux créer une base test séparée
+  database: wacdo_test  # tu peux créer une base test séparée
 
 production:
   <<: *default
