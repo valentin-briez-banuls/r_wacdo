@@ -18,15 +18,22 @@ ENV RAILS_ENV="production" \
 
 FROM base AS build
 
-# Installer packages nécessaires à la compilation des gems (libpq-dev pour pg)
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y \
-      build-essential git libyaml-dev pkg-config libpq-dev && \
+      build-essential git libyaml-dev pkg-config libpq-dev curl && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+# Install Node.js & Yarn for JS bundling (important!)
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y nodejs && \
+    npm install --global yarn
 
 COPY Gemfile Gemfile.lock ./
 
 RUN bundle install
+
+# Remaining steps unchanged...
+
 
 # Debug : lister fichiers importants
 RUN ls -la /usr/local/bundle && ls -la tmp || true
