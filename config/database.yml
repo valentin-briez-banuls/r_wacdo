@@ -16,4 +16,5 @@ test:
   database: wacdo_test  # tu peux créer une base test séparée
 
 production:
-  <<: *default
+  url: dpg-d0o2b0uuk2gs73fkrolg-a.oregon-postgres.render.com
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5) %>

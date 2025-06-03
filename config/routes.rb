@@ -40,6 +40,6 @@ Rails.application.routes.draw do
   resources :restaurants
   resources :fonctions
   resources :affectations
-  resources :collaborateurs, only: [:index, :new, :create, :edit, :update, :destroy]
+  resources :collaborateurs, only: [:index, :new, :create, :edit, :update, :destroy, :show]
 
 end

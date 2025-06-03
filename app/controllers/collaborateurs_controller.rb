@@ -8,7 +8,9 @@ class CollaborateursController < ApplicationController
 
 
   def show
+    @collaborateur = Collaborateur.find(params[:id])
   end
+
 
   def new
     @collaborateur = Collaborateur.new
