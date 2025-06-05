@@ -1,4 +1,4 @@
-# Étape 1 : Build
+# Étape 1
 FROM ruby:3.2 AS builder
 
 ARG RAILS_ENV=production
@@ -8,37 +8,24 @@ ENV RAILS_ENV=$RAILS_ENV \
     RAILS_MASTER_KEY=$RAILS_MASTER_KEY \
     NODE_ENV=production
 
-RUN apt-get update -qq && apt-get install -y \
-    build-essential \
-    libpq-dev \
-    nodejs \
-    yarn \
-    curl
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs yarn curl
 
 WORKDIR /app
 COPY . .
 
 RUN gem install bundler
-
-# Installe les gems dans /bundle
 RUN bundle config set path /bundle
 RUN bundle install --without development test
 
 RUN bundle exec rails assets:precompile
 
-# Étape 2 : Image finale plus légère
+# Étape 2
 FROM ruby:3.2 AS app
 
 ARG RAILS_ENV=production
-ENV RAILS_ENV=$RAILS_ENV \
-    NODE_ENV=production \
-    PATH="/bundle/bin:$PATH"
+ENV RAILS_ENV=$RAILS_ENV NODE_ENV=production PATH="/bundle/bin:$PATH"
 
-RUN apt-get update -qq && apt-get install -y \
-    libpq-dev \
-    nodejs \
-    yarn \
-    curl
+RUN apt-get update -qq && apt-get install -y libpq-dev nodejs yarn curl
 
 WORKDIR /app
 
