@@ -1,30 +1,34 @@
 <h1>Liste des restaurants</h1>
-<%= link_to 'Nouveau restaurant', new_restaurant_path %>
+
+<%= link_to 'Nouveau restaurant', new_restaurant_path, class: "btn btn-primary mb-3" %>
 
 <%= search_form_for @q, url: restaurants_path, method: :get, local: true do |f| %>
-  <div>
-    <%= f.label :name_cont, "Nom du restaurant contient" %>
-    <%= f.search_field :name_cont %>
-
-    <%= f.label :city_cont, "Ville contient" %>
-    <%= f.search_field :city_cont %>
-
-    <%= f.submit "Rechercher" %>
-    <%= link_to "Réinitialiser", restaurants_path %>
+  <div class="mb-3 row g-3 align-items-center">
+    <div class="col-auto">
+      <%= f.label :name_cont, "Nom du restaurant contient", class: "form-label" %>
+      <%= f.search_field :name_cont, class: "form-control" %>
+    </div>
+    <div class="col-auto">
+      <%= f.label :city_cont, "Ville contient", class: "form-label" %>
+      <%= f.search_field :city_cont, class: "form-control" %>
+    </div>
+    <div class="col-auto align-self-end">
+      <%= f.submit "Rechercher", class: "btn btn-outline-primary" %>
+      <%= link_to "Réinitialiser", restaurants_path, class: "btn btn-outline-secondary ms-2" %>
+    </div>
   </div>
 <% end %>
 
-<table>
-  <thead>
+<table class="table table-striped table-hover">
+  <thead class="table-dark">
   <tr>
     <th>Nom</th>
     <th>Adresse</th>
     <th>Code postal</th>
     <th>Ville</th>
-    <th></th>
+    <th>Actions</th>
   </tr>
   </thead>
-
   <tbody>
   <% @restaurants.each do |restaurant| %>
     <tr>
@@ -32,9 +36,10 @@
       <td><%= restaurant.address %></td>
       <td><%= restaurant.postal_code %></td>
       <td><%= restaurant.city %></td>
-      <td><%= link_to 'Voir', restaurant_path(restaurant) %></td>
+      <td>
+        <%= link_to 'Voir', restaurant_path(restaurant), class: "btn btn-sm btn-info" %>
+      </td>
     </tr>
   <% end %>
   </tbody>
 </table>
-

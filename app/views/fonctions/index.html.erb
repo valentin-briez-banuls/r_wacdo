@@ -1,18 +1,22 @@
 <h1>Liste des fonctions</h1>
 
-<%= link_to "Nouvelle fonction", new_fonction_path, class: "btn btn-primary" %>
-<%= search_form_for @q, url: fonctions_path, method: :get, local: true do |f| %>
-  <div>
-    <%= f.label :title_cont, "Titre contient" %>
-    <%= f.search_field :title_cont %>
+<%= link_to "Nouvelle fonction", new_fonction_path, class: "btn btn-primary mb-3" %>
 
-    <%= f.submit "Rechercher" %>
-    <%= link_to "Réinitialiser", fonctions_path %>
+<%= search_form_for @q, url: fonctions_path, method: :get, local: true do |f| %>
+  <div class="mb-3 row g-3 align-items-center">
+    <div class="col-auto">
+      <%= f.label :title_cont, "Titre contient", class: "form-label" %>
+      <%= f.search_field :title_cont, class: "form-control" %>
+    </div>
+    <div class="col-auto align-self-end">
+      <%= f.submit "Rechercher", class: "btn btn-outline-primary" %>
+      <%= link_to "Réinitialiser", fonctions_path, class: "btn btn-outline-secondary ms-2" %>
+    </div>
   </div>
 <% end %>
 
-<table>
-  <thead>
+<table class="table table-striped table-hover">
+  <thead class="table-dark">
   <tr>
     <th>Nom</th>
     <th>Description</th>
@@ -25,8 +29,8 @@
       <td><%= fonction.title %></td>
       <td><%= fonction.description %></td>
       <td>
-        <%= link_to "Modifier", edit_fonction_path(fonction) %> |
-        <%= link_to "Supprimer", fonction, method: :delete, data: { confirm: "Êtes-vous sûr ?" } %>
+        <%= link_to "Modifier", edit_fonction_path(fonction), class: "btn btn-sm btn-warning me-1" %>
+        <%= link_to "Supprimer", fonction, method: :delete, data: { confirm: "Êtes-vous sûr ?" }, class: "btn btn-sm btn-danger" %>
       </td>
     </tr>
   <% end %>

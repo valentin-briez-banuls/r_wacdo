@@ -1,32 +1,43 @@
-<h1>Liste des affectations</h1>
-<%= link_to "Nouvelle affectation", new_affectation_path, class: "btn btn-primary" %>
+<h1 class="mb-4">Liste des affectations</h1>
+
+<%= link_to "Nouvelle affectation", new_affectation_path, class: "btn btn-primary mb-3" %>
 
 <%= search_form_for @q, url: affectations_path, method: :get, local: true do |f| %>
-  <div>
-    <%= f.label :collaborateur_first_name_cont, "Prénom collaborateur" %>
-    <%= f.search_field :collaborateur_first_name_cont %>
+  <div class="row g-3 mb-4">
+    <div class="col-md-3">
+      <%= f.label :collaborateur_first_name_cont, "Prénom collaborateur" %>
+      <%= f.search_field :collaborateur_first_name_cont, class: "form-control" %>
+    </div>
 
-    <%= f.label :restaurant_id_eq, "Restaurant" %>
-    <%= f.collection_select :restaurant_id_eq, Restaurant.all, :id, :name, { prompt: "Tous les restaurants" } %>
+    <div class="col-md-3">
+      <%= f.label :restaurant_id_eq, "Restaurant" %>
+      <%= f.collection_select :restaurant_id_eq, Restaurant.all, :id, :name, { prompt: "Tous les restaurants" }, class: "form-select" %>
+    </div>
 
+    <div class="col-md-3">
+      <%= f.label :fonction_title_cont, "Fonction" %>
+      <%= f.search_field :fonction_title_cont, class: "form-control" %>
+    </div>
 
-    <%= f.label :fonction_title_cont, "Fonction" %>
-    <%= f.search_field :fonction_title_cont %>
+    <div class="col-md-3">
+      <%= f.label :start_date_gteq, "À partir du" %>
+      <%= f.date_field :start_date_gteq, class: "form-control" %>
+    </div>
 
-    <%= f.label :start_date_gteq, "À partir du" %>
-    <%= f.date_field :start_date_gteq %>
+    <div class="col-md-3">
+      <%= f.label :end_date_lteq, "Jusqu’au" %>
+      <%= f.date_field :end_date_lteq, class: "form-control" %>
+    </div>
 
-    <%= f.label :end_date_lteq, "Jusqu’au" %>
-    <%= f.date_field :end_date_lteq %>
-
-    <%= f.submit "Rechercher" %>
-    <%= link_to "Réinitialiser", affectations_path %>
+    <div class="col-md-3 align-self-end">
+      <%= f.submit "Rechercher", class: "btn btn-outline-primary" %>
+      <%= link_to "Réinitialiser", affectations_path, class: "btn btn-secondary ms-2" %>
+    </div>
   </div>
 <% end %>
 
-
-<table>
-  <thead>
+<table class="table table-striped table-bordered table-hover">
+  <thead class="table-dark">
   <tr>
     <th>Collaborateur</th>
     <th>Fonction</th>
@@ -40,11 +51,11 @@
     <tr>
       <td><%= affectation.collaborateur.first_name %> <%= affectation.collaborateur.last_name %></td>
       <td><%= affectation.fonction.title %></td>
-      <td><%= affectation.start_date %></td>
-      <td><%= affectation.end_date %></td>
+      <td><%= affectation.start_date.strftime("%d/%m/%Y") %></td>
+      <td><%= affectation.end_date&.strftime("%d/%m/%Y") || "—" %></td>
       <td>
-        <%= link_to "Modifier", edit_affectation_path(affectation) %> |
-        <%= link_to "Supprimer", affectation, method: :delete, data: { confirm: "Êtes-vous sûr ?" } %>
+        <%= link_to "Modifier", edit_affectation_path(affectation), class: "btn btn-sm btn-warning me-1" %>
+        <%= link_to "Supprimer", affectation, method: :delete, data: { confirm: "Êtes-vous sûr ?" }, class: "btn btn-sm btn-danger" %>
       </td>
     </tr>
   <% end %>

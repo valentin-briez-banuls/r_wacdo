@@ -18,6 +18,18 @@ class AffectationsController < ApplicationController
 
   def create
     @affectation = Affectation.new(affectation_params)
+
+    previous = Affectation
+                 .where(collaborateur_id: @affectation.collaborateur_id)
+                 .where("start_date < ?", @affectation.start_date)
+                 .where(end_date: nil)
+                 .order(start_date: :desc)
+                 .first
+
+    if previous
+      previous.update(end_date: @affectation.start_date)
+    end
+
     if @affectation.save
       redirect_to affectations_path, notice: "Affectation créée avec succès."
     else
@@ -26,6 +38,7 @@ class AffectationsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
 
   def edit
     @collaborateurs = Collaborateur.all

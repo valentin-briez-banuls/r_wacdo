@@ -1,25 +1,23 @@
 Rails.application.routes.draw do
-  get "affectations/index"
-  get "affectations/show"
-  get "affectations/new"
-  get "affectations/edit"
-  get "fonctions/index"
-  get "fonctions/show"
-  get "fonctions/new"
-  get "fonctions/edit"
-  get "restaurants/index"
-  get "restaurants/show"
-  get "restaurants/new"
-  get "restaurants/edit"
-  get "collaborateurs/index"
-  get "collaborateurs/show"
-  get "collaborateurs/new"
-  get "collaborateurs/edit"
-  get "sessions/new"
-  get "sessions/create"
-  get "sessions/destroy"
+  # get "affectations/index"
+  # get "affectations/show"
+  # get "affectations/new"
+  # get "affectations/edit"
+  # get "fonctions/index"
+  # get "fonctions/show"
+  # get "fonctions/new"
+  # get "fonctions/edit"
+  # get "restaurants/index"
+  # get "restaurants/show"
+  # get "restaurants/new"
+  # get "restaurants/edit"
+  # get "sessions/new"
+  # get "sessions/create"
+  # get "sessions/destroy"
   get "posts/index"
   devise_for :collaborateurs, skip: [:registrations]
+  resources :collaborateurs, only: [:index, :new, :create, :edit, :update, :destroy, :show]
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -33,13 +31,12 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "posts#index"
 
-  get    "/login",  to: "sessions#new"
-  post   "/login",  to: "sessions#create"
-  delete "/logout", to: "sessions#destroy"
+  # get    "/login",  to: "sessions#new"
+  # post   "/login",  to: "sessions#create"
+  # delete "/logout", to: "sessions#destroy"
 
   resources :restaurants
   resources :fonctions
   resources :affectations
-  resources :collaborateurs, only: [:index, :new, :create, :edit, :update, :destroy, :show]
 
 end

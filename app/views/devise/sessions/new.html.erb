@@ -1,4 +1,4 @@
-<%= form_with model: resource, as: resource_name, url: session_path(resource_name), local: true do |f| %>
+<%= form_with model: resource, as: resource_name, url: send("#{resource_name}_session_path"), local: true do |f| %>
   <div>
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>

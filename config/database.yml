@@ -13,8 +13,7 @@ development:
 
 test:
   <<: *default
-  database: wacdo_test  # tu peux créer une base test séparée
+  database: notebook_test  # tu peux créer une base test séparée
 
 production:
-  url: dpg-d0o2b0uuk2gs73fkrolg-a.oregon-postgres.render.com
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5) %>
+  <<: *default

@@ -1,27 +1,34 @@
 <h1>Liste des collaborateurs</h1>
-<%= link_to 'Nouveau collaborateur', new_collaborateur_path %>
+
+<%= link_to 'Nouveau collaborateur', new_collaborateur_path, class: "btn btn-primary mb-3" %>
 
 <%= search_form_for @q, url: collaborateurs_path, method: :get, local: true do |f| %>
-  <div>
-    <%= f.label :first_name_cont, "Prénom contient" %>
-    <%= f.search_field :first_name_cont %>
-
-    <%= f.label :last_name_cont, "Nom contient" %>
-    <%= f.search_field :last_name_cont %>
-
-    <%= f.label :email_cont, "Email contient" %>
-    <%= f.search_field :email_cont %>
-
-    <%= f.label :admin_eq, "Administrateur ?" %>
-    <%= f.select :admin_eq, [["Oui", true], ["Non", false]], include_blank: "Tous" %>
-
-    <%= f.submit "Rechercher" %>
-    <%= link_to "Réinitialiser", collaborateurs_path, class: "button" %>
+  <div class="mb-3 row g-3 align-items-center">
+    <div class="col-auto">
+      <%= f.label :first_name_cont, "Prénom contient", class: "form-label" %>
+      <%= f.search_field :first_name_cont, class: "form-control" %>
+    </div>
+    <div class="col-auto">
+      <%= f.label :last_name_cont, "Nom contient", class: "form-label" %>
+      <%= f.search_field :last_name_cont, class: "form-control" %>
+    </div>
+    <div class="col-auto">
+      <%= f.label :email_cont, "Email contient", class: "form-label" %>
+      <%= f.search_field :email_cont, class: "form-control" %>
+    </div>
+    <div class="col-auto">
+      <%= f.label :admin_eq, "Administrateur ?", class: "form-label" %>
+      <%= f.select :admin_eq, [["Oui", true], ["Non", false]], { include_blank: "Tous" }, class: "form-select" %>
+    </div>
+    <div class="col-auto align-self-end">
+      <%= f.submit "Rechercher", class: "btn btn-outline-primary" %>
+      <%= link_to "Réinitialiser", collaborateurs_path, class: "btn btn-outline-secondary ms-2" %>
+    </div>
   </div>
 <% end %>
 
-<table>
-  <thead>
+<table class="table table-striped table-hover">
+  <thead class="table-dark">
   <tr>
     <th>Prénom</th>
     <th>Nom</th>
@@ -38,11 +45,12 @@
       <td><%= collaborateur.email %></td>
       <td><%= collaborateur.admin? ? "Oui" : "Non" %></td>
       <td>
-        <%= link_to "Voir", collaborateur_path(collaborateur) %> |
-        <%= link_to "Modifier", edit_collaborateur_path(collaborateur) %> |
+        <%= link_to "Voir", collaborateur_path(collaborateur), class: "btn btn-sm btn-info me-1" %>
+        <%= link_to "Modifier", edit_collaborateur_path(collaborateur), class: "btn btn-sm btn-warning me-1" %>
         <%= link_to "Supprimer", collaborateur_path(collaborateur),
                     method: :delete,
-                    data: { confirm: "Confirmer ?" } %>
+                    data: { confirm: "Confirmer ?" },
+                    class: "btn btn-sm btn-danger" %>
       </td>
     </tr>
   <% end %>
