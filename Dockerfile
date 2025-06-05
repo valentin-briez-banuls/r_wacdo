@@ -1,38 +1,56 @@
-# Étape 1 : Build des assets
-FROM ruby:3.2 as builder
+# Étape 1 : Build
+FROM ruby:3.2 AS builder
 
-# Installation des dépendances système
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs yarn
+# Variables d'environnement
+ARG RAILS_ENV=production
+ARG RAILS_MASTER_KEY
 
-# Créer le dossier de l'app
+ENV RAILS_ENV=$RAILS_ENV \
+    RAILS_MASTER_KEY=$RAILS_MASTER_KEY \
+    NODE_ENV=production
+
+# Dépendances système
+RUN apt-get update -qq && apt-get install -y \
+    build-essential \
+    libpq-dev \
+    nodejs \
+    yarn \
+    curl
+
+# App setup
 WORKDIR /app
-
-# Copier les fichiers
 COPY . .
 
-# Installer les gems
-RUN bundle install
+# Installation des gems
+RUN gem install bundler
+RUN bundle install --without development test
 
-# Passer la master key au moment du build
-ARG RAILS_MASTER_KEY
-ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
-
-# Précompilation des assets (avec clé de chiffrement pour credentials.yml.enc si nécessaire)
+# Précompilation des assets
 RUN bundle exec rails assets:precompile
 
 # Étape 2 : Image finale plus légère
-FROM ruby:3.2
+FROM ruby:3.2 AS app
 
-RUN apt-get update -qq && apt-get install -y libpq-dev nodejs
+ARG RAILS_ENV=production
+ENV RAILS_ENV=$RAILS_ENV \
+    NODE_ENV=production
 
+# Dépendances système
+RUN apt-get update -qq && apt-get install -y \
+    libpq-dev \
+    nodejs \
+    yarn \
+    curl
+
+# Dossier app
 WORKDIR /app
-
 COPY --from=builder /app /app
 
-# Re-bundle si besoin (optionnel si on copie `vendor/bundle`)
-RUN bundle install
+# Installation des gems en cache (optionnel)
+RUN gem install bundler
 
+# Port d'écoute (si utile)
 EXPOSE 3000
 
-# Lancer le serveur
-CMD ["bash", "-c", "bundle exec rails db:migrate && bundle exec rails s -b 0.0.0.0"]
+# Commande de lancement
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
