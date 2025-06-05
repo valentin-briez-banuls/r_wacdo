@@ -1,7 +1,47 @@
-<h1><%= @collaborateur.first_name %> <%= @collaborateur.last_name %></h1>
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="card-title"><%= @collaborateur.first_name %> <%= @collaborateur.last_name %></h1>
 
-<p>Email : <%= @collaborateur.email %></p>
-<p>Admin : <%= @collaborateur.admin? ? "Oui" : "Non" %></p>
+      <p class="card-text">
+        <strong>Email :</strong> <%= @collaborateur.email %><br>
+        <strong>Admin :</strong> <%= @collaborateur.admin? ? "Oui" : "Non" %>
+      </p>
 
-<%= link_to 'Modifier', edit_collaborateur_path(@collaborateur) %> |
-<%= link_to 'Retour à la liste', collaborateurs_path %>
+      <%= link_to 'Modifier', edit_collaborateur_path(@collaborateur), class: "btn btn-warning me-2" %>
+      <%= link_to 'Retour à la liste', collaborateurs_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h1 class="card-title"> Affectations</h1>
+
+      <% if @affectations.any? %>
+
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Restaurant</th>
+            <th>Fonction</th>
+            <th>Date de début</th>
+            <th>Date de fin</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @affectations.each do |affectation| %>
+            <tr>
+              <td><%= link_to affectation.restaurant.name, restaurant_path(affectation.restaurant) %></td>
+              <td><%= affectation.fonction.title %></td>
+              <td><%= l affectation.start_date %></td>
+              <td><%= affectation.end_date.present? ? l(affectation.end_date) : "En cours" %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p>Aucune affectation.</p>
+      <% end %>
+    </div>
+  </div>
+
+</div>

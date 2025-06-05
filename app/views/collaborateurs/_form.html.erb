@@ -1,51 +1,51 @@
 <%= form_with(model: @collaborateur, local: true) do |form| %>
-  <% if collaborateur.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(collaborateur.errors.count, "erreur") %> empêchent la sauvegarde :</h2>
+  <% if @collaborateur.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(@collaborateur.errors.count, "erreur") %> empêchent la sauvegarde :</h4>
       <ul>
-        <% collaborateur.errors.full_messages.each do |message| %>
+        <% @collaborateur.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :first_name %><br>
-    <%= form.text_field :first_name %>
+  <div class="mb-3">
+    <%= form.label :first_name, class: "form-label" %>
+    <%= form.text_field :first_name, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :last_name %><br>
-    <%= form.text_field :last_name %>
+  <div class="mb-3">
+    <%= form.label :last_name, class: "form-label" %>
+    <%= form.text_field :last_name, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :email %><br>
-    <%= form.email_field :email %>
+  <div class="mb-3">
+    <%= form.label :email, class: "form-label" %>
+    <%= form.email_field :email, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :admin %><br>
-    <%= form.check_box :admin, { id: 'admin-checkbox' } %>
+  <div class="form-check mb-3">
+    <%= form.check_box :admin, { id: 'admin-checkbox', class: "form-check-input" } %>
+    <%= form.label :admin, class: "form-check-label", for: 'admin-checkbox' %>
   </div>
 
   <div id="password-fields" style="<%= @collaborateur.admin? ? '' : 'display:none;' %>">
-    <div>
-      <%= form.label :password %><br>
-      <%= form.password_field :password %>
+    <div class="mb-3">
+      <%= form.label :password, class: "form-label" %>
+      <%= form.password_field :password, class: "form-control" %>
     </div>
 
-    <div>
-      <%= form.label :password_confirmation %><br>
-      <%= form.password_field :password_confirmation %>
+    <div class="mb-3">
+      <%= form.label :password_confirmation, class: "form-label" %>
+      <%= form.password_field :password_confirmation, class: "form-control" %>
     </div>
   </div>
-
 
   <div>
-    <%= form.submit collaborateur.new_record? ? "Créer" : "Mettre à jour" %>
+    <%= form.submit @collaborateur.new_record? ? "Créer" : "Mettre à jour", class: "btn btn-primary" %>
   </div>
+
   <script>
       document.addEventListener("DOMContentLoaded", function () {
           const adminCheckbox = document.getElementById("admin-checkbox");
@@ -56,15 +56,13 @@
                   passwordFields.style.display = "block";
               } else {
                   passwordFields.style.display = "none";
-                  // Optionnel : vider les champs
                   document.querySelector('[name="collaborateur[password]"]').value = '';
                   document.querySelector('[name="collaborateur[password_confirmation]"]').value = '';
               }
           }
 
           adminCheckbox.addEventListener("change", togglePasswordFields);
-          togglePasswordFields(); // Init au chargement
+          togglePasswordFields();
       });
   </script>
-
 <% end %>

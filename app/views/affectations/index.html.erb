@@ -11,7 +11,9 @@
 
     <div class="col-md-3">
       <%= f.label :restaurant_id_eq, "Restaurant" %>
-      <%= f.collection_select :restaurant_id_eq, Restaurant.all, :id, :name, { prompt: "Tous les restaurants" }, class: "form-select" %>
+      <%= f.collection_select :restaurant_id_eq, Restaurant.all, :id, :name,
+                              { prompt: "Tous les restaurants" },
+                              { class: "form-select select2" } %>
     </div>
 
     <div class="col-md-3">
@@ -55,7 +57,10 @@
       <td><%= affectation.end_date&.strftime("%d/%m/%Y") || "—" %></td>
       <td>
         <%= link_to "Modifier", edit_affectation_path(affectation), class: "btn btn-sm btn-warning me-1" %>
-        <%= link_to "Supprimer", affectation, method: :delete, data: { confirm: "Êtes-vous sûr ?" }, class: "btn btn-sm btn-danger" %>
+        <%= button_to "Supprimer", affectation_path(affectation), method: :delete,
+                      data: { confirm: "Êtes-vous sûr ?" },
+                      class: "btn btn-sm btn-danger",
+                      form: { class: "d-inline" } %>
       </td>
     </tr>
   <% end %>

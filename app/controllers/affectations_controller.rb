@@ -1,4 +1,5 @@
 class AffectationsController < ApplicationController
+  before_action :authenticate_collaborateur!
   before_action :set_affectation, only: %i[show edit update destroy]
 
   def index
@@ -12,9 +13,11 @@ class AffectationsController < ApplicationController
 
   def new
     @affectation = Affectation.new
+    @affectation.restaurant_id = params[:restaurant_id] if params[:restaurant_id].present?
     @collaborateurs = Collaborateur.all
     @fonctions = Fonction.all
   end
+
 
   def create
     @affectation = Affectation.new(affectation_params)

@@ -9,7 +9,9 @@ class CollaborateursController < ApplicationController
 
   def show
     @collaborateur = Collaborateur.find(params[:id])
+    @affectations = @collaborateur.affectations.includes(:restaurant, :fonction)
   end
+
 
 
   def new

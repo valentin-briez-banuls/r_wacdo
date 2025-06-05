@@ -23,7 +23,9 @@ class RestaurantsController < ApplicationController
 
   def show
     @restaurant = Restaurant.find(params[:id])
+    @affectations = @restaurant.affectations.includes(:collaborateur, :fonction)
   end
+
 
   def edit
     @restaurant = Restaurant.find(params[:id])
@@ -36,6 +38,18 @@ class RestaurantsController < ApplicationController
       render :edit, status: :unprocessable_entity
     end
   end
+
+  def destroy
+    @restaurant = Restaurant.find(params[:id])
+    if @restaurant.affectations.exists?
+      redirect_to restaurants_path, alert: "Impossible de supprimer ce restaurant car des affectations y sont liées."
+    else
+      @restaurant.destroy
+      redirect_to restaurants_path, notice: "Restaurant supprimé avec succès."
+    end
+  end
+
+
 
   private
 

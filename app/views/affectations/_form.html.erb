@@ -1,36 +1,46 @@
 <%= form_with(model: @affectation, local: true) do |form| %>
-  <div>
-    <%= form.label :restaurant_id, "Restaurant" %>
-    <%= form.collection_select :restaurant_id, Restaurant.all, :id, :name, prompt: "Sélectionner un restaurant" %>
+  <% if @affectation.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(@affectation.errors.count, "erreur") %> empêchent la sauvegarde :</h4>
+      <ul>
+        <% @affectation.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :restaurant_id, "Restaurant", class: "form-label" %>
+    <%= form.collection_select :restaurant_id, Restaurant.all, :id, :name, { prompt: "Sélectionner un restaurant" }, class: "form-select" %>
   </div>
 
-  <div>
-    <%= form.label :collaborateur_id, "Collaborateur" %>
+  <div class="mb-3">
+    <%= form.label :collaborateur_id, "Collaborateur", class: "form-label" %>
     <% if @affectation.persisted? %>
-      <!-- Affichage en lecture seule si c'est une édition -->
-      <%= Collaborateur.find(@affectation.collaborateur_id).full_name %>
+      <p class="form-control-plaintext"><%= Collaborateur.find(@affectation.collaborateur_id).full_name %></p>
       <%= form.hidden_field :collaborateur_id %>
     <% else %>
-      <%= form.collection_select :collaborateur_id, @collaborateurs, :id, :full_name, prompt: "Sélectionner un collaborateur" %>
+      <%= form.collection_select :collaborateur_id, @collaborateurs, :id, :full_name, { prompt: "Sélectionner un collaborateur" }, class: "form-select" %>
     <% end %>
   </div>
 
-  <div>
-    <%= form.label :fonction_id, "Fonction" %>
-    <%= form.collection_select :fonction_id, @fonctions, :id, :title, prompt: "Sélectionner une fonction" %>
+  <div class="mb-3">
+    <%= form.label :fonction_id, "Fonction", class: "form-label" %>
+    <%= form.collection_select :fonction_id, @fonctions, :id, :title, { prompt: "Sélectionner une fonction" }, class: "form-select" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :start_date, "Date début", class: "form-label" %>
+    <%= form.date_field :start_date, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :end_date, "Date fin", class: "form-label" %>
+    <%= form.date_field :end_date, class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :start_date, "Date début" %>
-    <%= form.date_field :start_date %>
-  </div>
-
-  <div>
-    <%= form.label :end_date, "Date fin" %>
-    <%= form.date_field :end_date %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>

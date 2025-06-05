@@ -1,15 +1,26 @@
-<%= form_with(model: @fonction) do |form| %>
-  <div>
-    <%= form.label :title, "Nom" %>
-    <%= form.text_field :title %>
+<%= form_with(model: @fonction, local: true) do |form| %>
+  <% if @fonction.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(@fonction.errors.count, "erreur") %> empêchent la sauvegarde :</h4>
+      <ul>
+        <% @fonction.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :title, "Nom", class: "form-label" %>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :description, "Description", class: "form-label" %>
+    <%= form.text_area :description, class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :description, "Description" %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>

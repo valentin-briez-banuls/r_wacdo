@@ -32,4 +32,7 @@ class Collaborateur < ApplicationRecord
       admin
     ]
   end
+  def self.ransackable_associations(auth_object = nil)
+    %w[affectations restaurants]
+  end
 end

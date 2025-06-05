@@ -7,51 +7,68 @@
 
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
-<div class="container-fluid">
-  <div class="row">
-    <!-- Sidebar -->
-    <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar py-4">
-      <div class="position-sticky">
-        <h5 class="px-3">Menu</h5>
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <%= link_to "Dashboard", root_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Affectations", affectations_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Restaurants", restaurants_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Fonctions", fonctions_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Collaborateurs", collaborateurs_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Se déconnecter", destroy_collaborateur_session_path, method: :delete, class: "nav-link text-danger" %>
-          </li>
-        </ul>
-      </div>
-    </nav>
+<% if collaborateur_signed_in? %>
+  <div class="container-fluid">
+    <div class="row">
 
-    <!-- Main content -->
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
-      <% if notice %>
-        <div class="alert alert-success"><%= notice %></div>
-      <% end %>
-      <% if alert %>
-        <div class="alert alert-danger"><%= alert %></div>
-      <% end %>
+      <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar py-4 min-vh-100">
+        <div class="position-sticky">
+          <h5 class="px-3">Wacdo</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <%= link_to "Affectations", affectations_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Restaurants", restaurants_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Fonctions", fonctions_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Collaborateurs", collaborateurs_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= button_to "Se déconnecter", destroy_collaborateur_session_path, method: :delete, class: "nav-link text-danger" %>
+            </li>
+          </ul>
+        </div>
+      </nav>
 
-      <%= yield %>
-    </main>
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+        <% if notice %>
+          <div class="alert alert-success"><%= notice %></div>
+        <% end %>
+        <% if alert %>
+          <div class="alert alert-danger"><%= alert %></div>
+        <% end %>
+
+        <%= yield %>
+      </main>
+    </div>
   </div>
-</div>
+<% else %>
+  <%= yield %> <!-- Pour le formulaire de connexion uniquement -->
+<% end %>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        $('.select2').select2({
+            width: '100%',
+            placeholder: 'Sélectionner un restaurant',
+            allowClear: true,
+            dropdownParent: $('main'),
+            theme: 'bootstrap-5'
+        });
+    });
+</script>
+
 </body>
 </html>

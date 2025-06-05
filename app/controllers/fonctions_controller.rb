@@ -1,4 +1,5 @@
 class FonctionsController < ApplicationController
+  before_action :authenticate_collaborateur!
   before_action :set_fonction, only: %i[show edit update destroy]
 
   def index
