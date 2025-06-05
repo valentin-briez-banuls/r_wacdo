@@ -100,6 +100,7 @@ GEM
       warden (~> 1.2.3)
     erb (5.0.1)
     erubi (1.13.1)
+    execjs (2.10.0)
     ffi (1.17.2-x86_64-linux-gnu)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -261,6 +262,8 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    uglifier (4.2.1)
+      execjs (>= 0.3.0, < 3)
     unicode-display_width (3.1.4)
       unicode-emoji (~> 4.0, >= 4.0.4)
     unicode-emoji (4.0.4)
@@ -302,6 +305,7 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   tzinfo-data
+  uglifier
   web-console
 
 RUBY VERSION

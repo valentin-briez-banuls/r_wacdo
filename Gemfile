@@ -32,8 +32,10 @@ gem "devise"
 gem 'ransack'
 
 gem "bootstrap", "~> 5.3.0"
+
 gem "sassc-rails"
 
+gem 'uglifier'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
