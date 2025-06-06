@@ -1,4 +1,3 @@
-# Étape 1 : Build
 FROM ruby:3.2 AS builder
 
 ARG RAILS_ENV=production
@@ -8,14 +7,12 @@ ENV RAILS_ENV=$RAILS_ENV \
     RAILS_MASTER_KEY=$RAILS_MASTER_KEY \
     NODE_ENV=production
 
-# Installer dépendances, Node.js, curl
 RUN apt-get update -qq && apt-get install -y \
     build-essential \
     libpq-dev \
     nodejs \
     curl
 
-# Installer le vrai Yarn (repo officiel)
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
     apt-get update && apt-get install -y yarn
@@ -30,7 +27,6 @@ RUN yarn install
 
 RUN bundle exec rails assets:precompile
 
-# Étape 2 : Image finale plus légère
 FROM ruby:3.2 AS app
 
 ARG RAILS_ENV=production
@@ -42,7 +38,6 @@ RUN apt-get update -qq && apt-get install -y \
     nodejs \
     curl
 
-# Installer le vrai Yarn aussi dans l'image finale (utile si assets dynamiques)
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
     apt-get update && apt-get install -y yarn
