@@ -25,6 +25,7 @@
             <th>Fonction</th>
             <th>Date de début</th>
             <th>Date de fin</th>
+            <th>Actions</th>
           </tr>
           </thead>
           <tbody>
@@ -34,6 +35,9 @@
               <td><%= affectation.fonction.title %></td>
               <td><%= l affectation.start_date %></td>
               <td><%= affectation.end_date.present? ? l(affectation.end_date) : "En cours" %></td>
+              <td>
+                <%= link_to 'Modifier', edit_affectation_path(affectation), class: "btn btn-sm btn-warning" %>
+              </td>
             </tr>
           <% end %>
           </tbody>
