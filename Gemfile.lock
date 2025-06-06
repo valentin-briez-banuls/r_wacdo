@@ -98,9 +98,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    diff-lcs (1.6.2)
     erb (5.0.1)
     erubi (1.13.1)
-    execjs (2.10.0)
     ffi (1.17.2-x86_64-linux-gnu)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -130,6 +130,7 @@ GEM
       net-imap
       net-pop
       net-smtp
+    map (6.6.0)
     marcel (1.0.4)
     matrix (0.4.2)
     method_source (1.1.0)
@@ -190,6 +191,12 @@ GEM
     rails-html-sanitizer (1.6.2)
       loofah (~> 2.21)
       nokogiri (>= 1.15.7, != 1.16.7, != 1.16.6, != 1.16.5, != 1.16.4, != 1.16.3, != 1.16.2, != 1.16.1, != 1.16.0.rc1, != 1.16.0)
+    rails_current (2.2.0)
+      map (~> 6.0)
+    rails_default_url_options (6.0.0)
+    rails_helper (2.2.2)
+      rails_current (>= 1.0)
+      rails_default_url_options (>= 1.0)
     railties (7.0.8.7)
       actionpack (= 7.0.8.7)
       activesupport (= 7.0.8.7)
@@ -213,6 +220,23 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     rexml (3.4.1)
+    rspec-core (3.13.4)
+      rspec-support (~> 3.13.0)
+    rspec-expectations (3.13.5)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-mocks (3.13.5)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-rails (7.1.1)
+      actionpack (>= 7.0)
+      activesupport (>= 7.0)
+      railties (>= 7.0)
+      rspec-core (~> 3.13)
+      rspec-expectations (~> 3.13)
+      rspec-mocks (~> 3.13)
+      rspec-support (~> 3.13)
+    rspec-support (3.13.4)
     rubocop (1.76.0)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
@@ -262,8 +286,6 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    uglifier (4.2.1)
-      execjs (>= 0.3.0, < 3)
     unicode-display_width (3.1.4)
       unicode-emoji (~> 4.0, >= 4.0.4)
     unicode-emoji (4.0.4)
@@ -297,7 +319,9 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.8, >= 7.0.8.7)
+  rails_helper
   ransack
+  rspec-rails
   rubocop
   sassc-rails
   selenium-webdriver
@@ -305,7 +329,6 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   tzinfo-data
-  uglifier
   web-console
 
 RUBY VERSION
