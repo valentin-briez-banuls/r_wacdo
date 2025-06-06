@@ -12,7 +12,7 @@ gem "sprockets-rails"
 gem "pg", "~> 1.1"
 
 # Web server
-gem "puma", "~> 5.0"
+gem "puma", "~> 6.6"
 
 # Importmap for ES modules
 gem "importmap-rails"
