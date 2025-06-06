@@ -1,24 +1,25 @@
-# README
+# 🍔 Wacdo
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**Wacdo** est une application Ruby on Rails permettant de gérer les collaborateurs, restaurants, affectations et fonctions d'une chaîne de restaurants.
 
-Things you may want to cover:
+---
 
-* Ruby version
+## ✨ Fonctionnalités
 
-* System dependencies
+- Authentification sécurisée des collaborateurs
+- Gestion des restaurants
+- Gestion des affectations (poste, date de début/fin)
+- Rôles administrateurs (admin ? oui / non)
+- Interface responsive avec Bootstrap
+- Interface d'administration CRUD complète
+- Déploiement en production prêt à l’emploi
 
-* Configuration
+---
 
-* Database creation
+## 📦 Installation
 
-* Database initialization
+### 1. Cloner le projet
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```bash
+git clone https://github.com/ton-utilisateur/wacdo.git
+cd wacdo
