@@ -1,4 +1,3 @@
-# Étape 1 : Build
 FROM ruby:3.2 AS builder
 
 ARG RAILS_ENV=production
@@ -20,9 +19,11 @@ COPY . .
 
 RUN gem install bundler
 RUN bundle install --without development test
+
+RUN yarn install --check-files
+
 RUN bundle exec rails assets:precompile
 
-# Étape 2 : Image finale plus légère
 FROM ruby:3.2 AS app
 
 ARG RAILS_ENV=production
