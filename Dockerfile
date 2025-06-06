@@ -20,7 +20,7 @@ COPY . .
 RUN gem install bundler
 RUN bundle install --without development test
 
-RUN yarn install --check-files
+RUN yarn install
 
 RUN bundle exec rails assets:precompile
 
