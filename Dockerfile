@@ -1,25 +1,3 @@
-# Étape 1
-FROM ruby:3.2 AS builder
-
-ARG RAILS_ENV=production
-ARG RAILS_MASTER_KEY
-
-ENV RAILS_ENV=$RAILS_ENV \
-    RAILS_MASTER_KEY=$RAILS_MASTER_KEY \
-    NODE_ENV=production
-
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs yarn curl
-
-WORKDIR /app
-COPY . .
-
-RUN gem install bundler
-RUN bundle config set path /bundle
-RUN bundle install --without development test
-
-RUN bundle exec rails assets:precompile
-
-# Étape 2
 FROM ruby:3.2 AS app
 
 ARG RAILS_ENV=production
@@ -31,6 +9,11 @@ WORKDIR /app
 
 COPY --from=builder /app /app
 COPY --from=builder /bundle /bundle
+
+# Debug avant lancement
+RUN ls -l /bundle/bin
+RUN which puma || echo "puma executable not found"
+RUN bundle list
 
 EXPOSE 3000
 
