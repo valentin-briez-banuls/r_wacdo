@@ -22,3 +22,6 @@
 ```bash
 git clone https://github.com/valentin-briez-banuls/r_wacdo
 cd wacdo
+docker build -t wacdo .
+docker run -p 3000:3000 wacdo
+
