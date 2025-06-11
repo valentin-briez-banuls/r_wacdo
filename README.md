@@ -24,4 +24,7 @@ git clone https://github.com/valentin-briez-banuls/r_wacdo
 cd wacdo
 docker build -t wacdo .
 docker run -p 3000:3000 wacdo
+```
 
+## Wacdo Diagramme
+[![Wacdo Diagramme](https://raw.githubusercontent.com/valentin-briez-banuls/r_wacdo/refs/heads/master/Wacdo%20Diagramme.png)]
