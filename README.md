@@ -4,7 +4,7 @@
 
 ---
 
-## ✨ Fonctionnalités
+## Fonctionnalités
 
 - Authentification sécurisée des collaborateurs
 - Gestion des restaurants
@@ -20,5 +20,5 @@
 ### 1. Cloner le projet
 
 ```bash
-git clone https://github.com/ton-utilisateur/wacdo.git
+git clone https://github.com/valentin-briez-banuls/r_wacdo
 cd wacdo
