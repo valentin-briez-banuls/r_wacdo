@@ -11,7 +11,6 @@
 - Gestion des affectations (poste, date de début/fin)
 - Rôles administrateurs (admin ? oui / non)
 - Interface responsive avec Bootstrap
-- Interface d'administration CRUD complète
 - Déploiement en production prêt à l’emploi
 
 ---
