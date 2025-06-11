@@ -42,7 +42,7 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 # Boot speed
 gem "bootsnap", require: false
 
-gem "rails_helper"
+# gem "rails_helper"
 
 gem "rspec-rails"
 

@@ -1,4 +1,3 @@
-# spec/models/restaurant_spec.rb
 require 'rails_helper'
 
 RSpec.describe Restaurant, type: :model do
