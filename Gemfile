@@ -8,7 +8,7 @@ gem "rails", "~> 7.0.8", ">= 7.0.8.7"
 gem "sprockets-rails"
 
 # DB
-gem "pg", "~> 1.1"
+gem "pg", "~> 1.6"
 
 # Web server
 gem "puma", "~> 5.0"
